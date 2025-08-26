@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+.venv/
+env/
+venv/
+pip-wheel-metadata/
+
+# Flask
+instance/
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs & temp
+*.log
+logs/
+tmp/
+temp/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Data & models (keep small samples via allowlists)
+data/
+data_split/
+datasets/
+models/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+
+# Images generated
+output_*
+*.png
+*.jpg
+*.jpeg
+
+# IDE
+.vscode/
+.idea/
+
+
