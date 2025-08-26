@@ -19,13 +19,13 @@ classification_model = None
 class_names = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
 
 DISEASE_NAMES = {
-    'akiec': 'Actinic Keratosis (ung thư da dạng sừng hóa ánh sáng)',
-    'bcc': 'Basal Cell Carcinoma (ung thư biểu mô tế bào đáy)',
-    'bkl': 'Benign Keratosis-like Lesions (tổn thương dạng sừng lành tính)',
-    'df': 'Dermatofibroma (u xơ da)',
-    'mel': 'Melanoma (ung thư hắc tố)',
-    'nv': 'Melanocytic Nevi (nốt ruồi sắc tố)',
-    'vasc': 'Vascular Lesions (tổn thương mạch máu)'
+    'akiec': 'Actinic keratosis (solar keratosis)',
+    'bcc': 'Basal cell carcinoma',
+    'bkl': 'Benign keratosis-like lesions',
+    'df': 'Dermatofibroma',
+    'mel': 'Melanoma',
+    'nv': 'Melanocytic nevi',
+    'vasc': 'Vascular lesions'
 }
 
 class CustomCNN(nn.Module):

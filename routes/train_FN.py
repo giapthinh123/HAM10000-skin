@@ -108,12 +108,12 @@ train_df = pd.read_csv('data_split/train/metadata.csv')
 val_df = pd.read_csv('data_split/val/metadata.csv')
 test_df = pd.read_csv('data_split/test/metadata.csv')
 
-# Tạo Dataset từ thư mục tương ứng
+# Create Dataset from corresponding directory
 train_dataset = HAM10000Dataset(train_df, 'data_split/train/', transform=train_transforms)
 val_dataset = HAM10000Dataset(val_df, 'data_split/val/', transform=val_transforms)
 test_dataset = HAM10000Dataset(test_df, 'data_split/test/', transform=val_transforms)
 
-# Tạo DataLoader
+# Create DataLoaders
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
@@ -142,7 +142,7 @@ for epoch in range(num_epochs):
     train_loss = running_loss / len(train_loader)
     train_acc = 100 * correct / total
 
-    # Đánh giá trên tập validation
+    # Evaluate on validation set
     model.eval()
     val_loss = 0.0
     correct = 0
@@ -162,10 +162,10 @@ for epoch in range(num_epochs):
 
     print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.2f}%')
 
-    # Cập nhật learning rate
+    # Update learning rate
     scheduler.step(val_loss)
 
     if val_acc > best_val_acc:
         best_val_acc = val_acc
         torch.save(model.state_dict(), "best_model_finetuned_v4.pth")
-        print(f"✅ Lưu model fine-tuned tốt nhất (Val Acc: {val_acc:.2f}%)")
+        print(f"Saved best fine-tuned model (Val Acc: {val_acc:.2f}%)")

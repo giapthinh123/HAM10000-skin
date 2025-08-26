@@ -42,7 +42,7 @@ Response
       "disease_probabilities": {
         "mel": {"percentage": 76.5, "description": "Melanoma ..."}
       },
-      "description": "Melanoma (ung thư hắc tố)"
+      "description": "Melanoma"
     }
   ]
 }
@@ -53,10 +53,10 @@ POST `/api/object-detection/detect/file`
 
 Form-Data: `file=@lesion.jpg`
 
-Response: như trên.
+Response: same as above.
 
-### Lỗi thường gặp
-- `Models not loaded`: kiểm tra `routes/object_detection.pt` và `routes/classification_model.pth` tồn tại.
-- `Invalid image format`: đảm bảo base64 hợp lệ hoặc file ảnh hợp lệ.
+### Common errors
+- `Models not loaded`: ensure `routes/object_detection.pt` and `routes/classification_model.pth` exist.
+- `Invalid image format`: make sure the base64 or uploaded image is valid.
 
 

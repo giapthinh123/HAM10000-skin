@@ -1,36 +1,36 @@
 # HAM10000 Skin Lesion Detection & Classification
 
-Ứng dụng Flask phát hiện vùng tổn thương da (YOLO) và phân loại 7 bệnh lý trên bộ dữ liệu HAM10000 bằng CNN tùy biến.
+Flask application for detecting skin lesion regions (YOLO) and classifying seven diseases on the HAM10000 dataset using a custom CNN.
 
 ---
 
 ### Badges
-- CI/CD: (chưa cấu hình)
+- CI/CD: (not configured)
 - License: MIT
 
 ---
 
-### Mục lục
-- [Giới thiệu](#giới-thiệu)
-- [Cài đặt](#cài-đặt)
-- [Chạy ứng dụng](#chạy-ứng-dụng)
+### Table of Contents
+- [Overview](#overview)
+- [Installation](#installation)
+- [Run](#run)
 - [API Usage](#api-usage)
-- [Cấu trúc thư mục](#cấu-trúc-thư-mục)
-- [Dữ liệu & Huấn luyện](#dữ-liệu--huấn-luyện)
-- [Đóng góp](#đóng-góp)
+- [Project Structure](#project-structure)
+- [Data & Training](#data--training)
+- [Contributing](#contributing)
 - [License](#license)
-- [Liên hệ](#liên-hệ)
+- [Contact](#contact)
 
 ---
 
-### Giới thiệu
-Backend cung cấp API:
-- Phát hiện vùng nghi ngờ bằng `YOLO` và cắt ảnh tổn thương.
-- Phân loại 7 lớp bệnh: `akiec, bcc, bkl, df, mel, nv, vasc` bằng `CustomCNN`.
-Frontend tĩnh nằm trong `static/` (nếu có `index.html`, server sẽ phục vụ ở `/`).
+### Overview
+Backend provides APIs to:
+- Detect suspicious regions using `YOLO` and crop the lesion area.
+- Classify seven classes: `akiec, bcc, bkl, df, mel, nv, vasc` using a `CustomCNN`.
+Static frontend is served from `static/` (if `index.html` exists, it is served at `/`).
 
-### Cài đặt
-Yêu cầu: Python 3.9+ (khuyến nghị), pip, virtualenv.
+### Installation
+Requirements: Python 3.9+ (recommended), pip, virtualenv.
 
 ```bash
 python -m venv .venv
@@ -38,21 +38,21 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Lưu ý: Model YOLO (`routes/object_detection.pt`) và trọng số phân loại (`routes/classification_model.pth`) cần được đặt đúng đường dẫn trước khi chạy.
+Note: Place YOLO model weights at `routes/object_detection.pt` and classification weights at `routes/classification_model.pth` before running.
 
-### Chạy ứng dụng
+### Run
 ```bash
 python main.py
 ```
-Mặc định chạy tại `http://localhost:5000`.
+Default URL: `http://localhost:5000`.
 
 ### API Usage
-- Sức khỏe hệ thống:
+- Health check:
 ```http
 GET /api/object-detection/health
 ```
 
-- Dò bằng base64:
+- Detect via base64:
 ```http
 POST /api/object-detection/detect
 Content-Type: application/json
@@ -62,14 +62,14 @@ Content-Type: application/json
 }
 ```
 
-- Dò bằng upload file:
+- Detect via file upload:
 ```http
 POST /api/object-detection/detect/file
 Content-Type: multipart/form-data
 file=@lesion.jpg
 ```
 
-Phản hồi mẫu:
+Sample response:
 ```json
 {
   "status": "success",
@@ -85,32 +85,32 @@ Phản hồi mẫu:
 }
 ```
 
-### Cấu trúc thư mục
+### Project Structure
 ```
 HAM10000-skin/
-  main.py                # Flask app, serve static và đăng ký blueprint
+  main.py                # Flask app, serves static and registers blueprint
   routes/
-    object_detection.py  # API, nạp YOLO + CNN, xử lý ảnh
-    train_FN.py          # Huấn luyện CNN (ví dụ)
-  static/                # Frontend tĩnh (index.html, favicon, ...)
-  random_samples/        # Ảnh mẫu thử nghiệm
+    object_detection.py  # API, loads YOLO + CNN, image processing
+    train_FN.py          # CNN training (example)
+  static/                # Static frontend (index.html, favicon, ...)
+  random_samples/        # Sample images
   requirements.txt
   README.md
 ```
 
-### Dữ liệu & Huấn luyện
-- Bộ dữ liệu: HAM10000 (tham khảo giấy phép và nguồn phát hành chính thức).
-- Script huấn luyện mẫu: `routes/train_FN.py` (sửa đường dẫn `data_split/...`).
-- Kết quả huấn luyện lưu: `best_model_finetuned_v4.pth` (ví dụ), khi triển khai API chuyển sang `routes/classification_model.pth` (theo định dạng load hiện tại: `checkpoint['model_state_dict']`).
+### Data & Training
+- Dataset: HAM10000 (observe the official license and distribution terms).
+- Example training script: `routes/train_FN.py` (update paths like `data_split/...`).
+- Model output example: `best_model_finetuned_v4.pth`. For the API, place weights at `routes/classification_model.pth` (expected format: `checkpoint['model_state_dict']`).
 
-### Đóng góp
-1. Fork repo, tạo nhánh tính năng: `feat/ten-tinh-nang`
-2. Commit theo Conventional Commits: `feat: ...`, `fix: ...`
-3. Mở Pull Request mô tả rõ thay đổi, kèm hướng dẫn test.
+### Contributing
+1. Fork the repo and create a feature branch: `feat/your-feature`
+2. Use Conventional Commits: `feat: ...`, `fix: ...`
+3. Open a Pull Request with clear description and test instructions.
 
 ### License
-MIT. Xem file `LICENSE`.
+MIT. See `LICENSE`.
 
-### Liên hệ
-- Mở issue trên repository này
-- Email: (điền email của bạn)
+### Contact
+- Open an issue on this repository
+- Email: (your email)
